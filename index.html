@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Godswill Iroka | Web Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #080910;
+  --panel: #11121e;
+  --card: #151624;
+  --text: #f7f5ff;
+  --muted: #bdb9d0;
+  --purple: #a43cff;
+  --border: #30243e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+header {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #10101b;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 29px;
+  font-weight: 800;
+  color: #bd79ff;
+}
+
+.brand strong, .brand small {
+  display: block;
+}
+
+.brand strong {
+  font-size: 14px;
+}
+
+.brand em {
+  color: #bd79ff;
+  font-style: normal;
+}
+
+.brand small {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav a {
+  font-size: 12px;
+  transition: .2s;
+}
+
+nav a:hover, nav a.active {
+  color: #bd79ff;
+}
+
+#themeToggle, #menuToggle {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#menuToggle {
+  display: none;
+}
+
+section {
+  padding: 35px 7%;
+  scroll-margin-top: 70px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 30px;
+  align-items: center;
+  min-height: 350px;
+  overflow: hidden;
+}
+
+.purple {
+  color: #b75aff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 4.5vw, 49px);
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+.hero h1 span, .about h2 span {
+  color: var(--purple);
+}
+
+.hero h2 {
+  color: #c7c3d8;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.hero-text > p:not(.purple) {
+  color: #d8d5e5;
+  max-width: 490px;
+  font-size: 13px;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 17px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #a43cff35;
+}
+
+.primary {
+  background: linear-gradient(110deg, #a832ff, #7628e8);
+  color: white;
+  border: 1px solid transparent;
+}
+
+.outline {
+  border: 1px solid #b45cff;
+  background: transparent;
+  color: var(--text);
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 18px;
+  color: #b65aff;
+  font-size: 11px;
+}
+
+.socials a:hover {
+  color: white;
+}
+
+.hero-image {
+  height: 320px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.hero-image img {
+  width: 75%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 150px 150px 0 0;
+  position: relative;
+  z-index: 1;
+  mask-image: linear-gradient(black 75%, transparent);
+}
+
+.glow {
+  position: absolute;
+  width: 75%;
+  height: 80%;
+  top: 25px;
+  border: 1px solid #9c3cff;
+  border-radius: 25px;
+  transform: rotate(8deg);
+  box-shadow: 0 0 55px #8c2dff30;
+}
+
+.code-note {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 2;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.code-note strong {
+  font-size: 25px;
+  color: #b65aff;
+}
+
+.section {
+  background: var(--panel);
+}
+
+.about {
+  display: grid;
+  grid-template-columns: 190px 1.2fr .9fr;
+  align-items: center;
+  gap: 25px;
+}
+
+.about-image {
+  border: 2px solid var(--purple);
+  padding: 3px;
+  border-radius: 13px;
+}
+
+.about-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 9px;
+}
+
+section h2 {
+  font-size: 24px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.about p:not(.purple) {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.facts {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 13px;
+  font-size: 10px;
+}
+
+.qualities {
+  display: grid;
+  gap: 14px;
+}
+
+.qualities article {
+  border-left: 2px solid var(--purple);
+  padding-left: 10px;
+}
+
+.qualities b {
+  font-size: 12px;
+}
+
+.qualities p {
+  margin: 0 !important;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 15px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.skill {
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 10px 25px;
+  position: relative;
+}
+
+.skill-icon {
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.html { color: #f26945; }
+.css { color: #348bff; }
+.js { color: #f6d74d; }
+.react { color: #42d7ed; }
+.git { color: white; }
+.vscode { color: #2599f2; }
+
+.skill h3 {
+  font-size: 11px;
+}
+
+.bar {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 40px;
+  height: 5px;
+  background: #302a40;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #b33cff, #7d35f0);
+}
+
+.skill small {
+  position: absolute;
+  bottom: 4px;
+  right: 9px;
+  font-size: 9px;
+}
+
+.projects-section {
+  background: #0b0c14;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--purple);
+}
+
+.project-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+}
+
+.project-info {
+  padding: 10px;
+}
+
+.project-info h3 {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.project-info p {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 9px;
+}
+
+.tags {
+  display: inline-block;
+  color: #d5b3ff;
+  background: #7834a525;
+  border: 1px solid #873bdc55;
+  border-radius: 20px;
+  padding: 3px 7px;
+  font-size: 9px;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr .8fr 1.2fr;
+  gap: 25px;
+  align-items: center;
+}
+
+.contact-intro {
+  border-right: 1px solid var(--border);
+  padding-right: 15px;
+}
+
+.contact-intro p:last-child {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.contact-details p {
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.contact-details span {
+  color: var(--muted);
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+form {
+  display: grid;
+  gap: 7px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+input, textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--purple);
+}
+
+textarea {
+  resize: vertical;
+}
+
+form .btn {
+  width: 100%;
+}
+
+#formNote {
+  font-size: 10px;
+}
+
+footer {
+  padding: 15px 7%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  background: #10101b;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+footer a {
+  color: #bd76ff;
+}
+
+body.light-theme {
+  --bg: #f4f0fa;
+  --panel: #ffffff;
+  --card: #faf8ff;
+  --text: #21152f;
+  --muted: #63596f;
+  --border: #e2d5ef;
+}
+
+body.light-theme header,
+body.light-theme footer,
+body.light-theme .projects-section {
+  background: #f9f6ff;
+}
+
+body.light-theme .hero-text > p:not(.purple),
+body.light-theme .hero h2 {
+  color: var(--muted);
+}
+
+body.light-theme .outline {
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 160px 1fr;
+  }
+
+  .qualities {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  form {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    height: 62px;
+    padding: 0 5%;
+  }
+
+  #menuToggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 61px;
+    left: 0;
+    width: 100%;
+    padding: 15px 6%;
+    background: #10101b;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 30px;
+    gap: 10px;
+  }
+
+  .hero h1 {
+    font-size: 39px;
+  }
+
+  .hero-image {
+    height: 260px;
+  }
+
+  .hero-image img {
+    width: 65%;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image {
+    width: 190px;
+    margin: auto;
+  }
+
+  .about-image img {
+    height: 190px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    gap: 10px;
+  }
+
+  .project-card img {
+    height: 95px;
+  }
+
+  .project-info {
+    padding: 8px;
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .contact-intro {
+    border: 0;
+  }
+
+  form {
+    grid-column: auto;
+  }
+
+  footer {
+    padding: 15px 5%;
+  }
+}
+
+@media (max-width: 360px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card img {
+    height: 150px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#home" class="brand">
+    <span class="logo">Gi</span>
+    <span>
+      <strong>Godswill <em>Iroka</em></strong>
+      <small>Web Developer</small>
+    </span>
+  </a>
+
+  <button id="menuToggle" aria-label="Open menu">☰</button>
+
+  <nav id="navLinks">
+    <a class="active" href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <button id="themeToggle" aria-label="Toggle theme">☾</button>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="hero-text">
+    <p class="purple">Hello, I'm</p>
+    <h1>Godswill <span>Iroka</span></h1>
+    <h2>Web Developer</h2>
+    <p>
+      I build modern, responsive and user-friendly websites.
+      I am passionate about turning ideas into real digital
+      experiences using HTML, CSS, JavaScript and more.
+    </p>
+
+    <div class="buttons">
+      <a href="#projects" class="btn primary">〈/〉 View My Projects</a>
+      <a href="#contact" class="btn outline">✉ Contact Me</a>
+    </div>
+
+    <div class="socials">
+      <a href="https://github.com/">GitHub</a>
+      <a href="https://linkedin.com/">LinkedIn</a>
+      <a href="https://instagram.com/">Instagram</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="glow"></div>
+    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt="Developer portrait">
+    <div class="code-note">
+      <strong>&lt;/&gt;</strong>
+      <p>Code<br>Build<br>Create</p>
+    </div>
+  </div>
+</section>
+
+<section class="about section" id="about">
+  <div class="about-image">
+    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="Profile portrait">
+  </div>
+
+  <div>
+    <p class="purple">About Me</p>
+    <h2>Who I <span>Am</span></h2>
+    <p>
+      I'm Godswill Iroka, a web developer with a passion for
+      building modern and responsive websites. I enjoy solving
+      problems, learning new technologies, and bringing ideas
+      to life through code.
+    </p>
+    <p>
+      I'm always open to new opportunities, collaborations,
+      and projects that help me grow as a developer.
+    </p>
+    <div class="facts">
+      <span>📍 Nigeria</span>
+      <span>🎓 Self-Taught</span>
+      <span>💻 Web Developer</span>
+    </div>
+  </div>
+
+  <div class="qualities">
+    <article><b>✦ Clean Code</b><p>I write clean, maintainable code.</p></article>
+    <article><b>♡ Creative Mind</b><p>I turn ideas into designs.</p></article>
+    <article><b>◎ Problem Solver</b><p>I find solutions to problems.</p></article>
+    <article><b>✧ Always Learning</b><p>I'm constantly improving my skills.</p></article>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="purple">My Skills</p>
+  <h2>What I Work With</h2>
+  <p class="muted">Technologies and tools I use to build websites.</p>
+
+  <div class="skills-grid">
+    <article class="skill"><div class="skill-icon html">5</div><h3>HTML</h3><div class="bar"><span style="width:90%"></span></div><small>90%</small></article>
+    <article class="skill"><div class="skill-icon css">3</div><h3>CSS</h3><div class="bar"><span style="width:85%"></span></div><small>85%</small></article>
+    <article class="skill"><div class="skill-icon js">JS</div><h3>JavaScript</h3><div class="bar"><span style="width:80%"></span></div><small>80%</small></article>
+    <article class="skill"><div class="skill-icon react">⚛</div><h3>React</h3><div class="bar"><span style="width:70%"></span></div><small>70%</small></article>
+    <article class="skill"><div class="skill-icon git">◉</div><h3>Git &amp; GitHub</h3><div class="bar"><span style="width:75%"></span></div><small>75%</small></article>
+    <article class="skill"><div class="skill-icon vscode">⌘</div><h3>VS Code</h3><div class="bar"><span style="width:85%"></span></div><small>85%</small></article>
+  </div>
+</section>
+
+<section class="projects-section" id="projects">
+  <p class="purple">My Projects</p>
+  <h2>Featured Projects</h2>
+  <p class="muted">Some projects I've built or plan to build.</p>
+
+  <div class="projects-grid">
+    <article class="project-card">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Business website preview">
+      <div class="project-info"><h3>Business Website ↗</h3><p>A modern business website with a responsive layout.</p><span class="tags">HTML · CSS · JavaScript</span></div>
+    </article>
+    <article class="project-card">
+      <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=600&q=80" alt="Portfolio website preview">
+      <div class="project-info"><h3>Portfolio Website ↗</h3><p>A personal portfolio to showcase skills and projects.</p><span class="tags">HTML · CSS · JavaScript</span></div>
+    </article>
+    <article class="project-card">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" alt="Landing page preview">
+      <div class="project-info"><h3>Landing Page ↗</h3><p>A landing page with a clean and attractive design.</p><span class="tags">HTML · CSS · JavaScript</span></div>
+    </article>
+    <article class="project-card">
+      <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=600&q=80" alt="Weather project preview">
+      <div class="project-info"><h3>Weather App ↗</h3><p>A weather app interface for displaying weather information.</p><span class="tags">HTML · CSS · JavaScript</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="contact section" id="contact">
+  <div class="contact-intro">
+    <p class="purple">Get In Touch</p>
+    <h2>Contact Me</h2>
+    <p>Have a project in mind? Feel free to reach out. I'm open to new opportunities!</p>
+  </div>
+
+  <div class="contact-details">
+    <p>✉ <strong>Email</strong><br><span>your-email@example.com</span></p>
+    <p>☎ <strong>Phone</strong><br><span>+234 Your Phone Number</span></p>
+    <p>📍 <strong>Location</strong><br><span>Nigeria</span></p>
+  </div>
+
+  <form id="contactForm">
+    <div class="form-row">
+      <input id="name" type="text" placeholder="Your Name" required>
+      <input id="email" type="email" placeholder="Your Email" required>
+    </div>
+    <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+    <button class="btn primary" type="submit">➤ Send Message</button>
+    <p id="formNote" class="muted"></p>
+  </form>
+</section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Godswill Iroka. All rights reserved.</p>
+  <a href="#home">Back to top ↑</a>
+</footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+const themeToggle = document.getElementById("themeToggle");
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+  menuToggle.textContent =
+    navLinks.classList.contains("open") ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.textContent = "☰";
+  });
+});
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+  themeToggle.textContent =
+    document.body.classList.contains("light-theme") ? "☀" : "☾";
+});
+
+document.getElementById("contactForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const note = document.getElementById("formNote");
+
+  if (!name || !email || !message) {
+    note.textContent = "Please complete all fields.";
+    return;
+  }
+
+  // Change this to your real email address.
+  const recipient = "your-email@example.com";
+
+  const subject = encodeURIComponent("Portfolio message from " + name);
+  const body = encodeURIComponent(
+    "Name: " + name +
+    "\nEmail: " + email +
+    "\n\nMessage:\n" + message
+  );
+
+  note.textContent = "Opening your email application...";
+
+  window.location.href =
+    `mailto:${recipient}?subject=${subject}&body=${body}`;
+});
+</script>
+
+</body>
+</html>
